@@ -1,0 +1,37 @@
+---
+title: "DDP shiny project"
+author: "XD"
+date: "July 9, 2018"
+output: html_document
+---
+
+## Shiny application for predicting wage based on Wage dataset.
+
+### Use the mtcars dataset to build a model to explore the relationship between a set of variables and miles per gallon (MPG).
+
+```{r}
+library(MASS)
+library(dplyr)
+library(ggplot2)
+library(caret)
+data(mtcars)
+summary(mtcars)
+```
+
+#### Stepwise regression
+
+```{r}
+SW_fit <- lm(mpg ~ .,data=mtcars) 
+stepSW_fit <- stepAIC(SW_fit, direction="both")
+```
+
+```{r}
+stepSW_fit$anova
+```
+
+
+```{r}
+final_model<- lm(mpg~wt+qsec+am, data = mtcars)
+summary(final_model)
+```
+
